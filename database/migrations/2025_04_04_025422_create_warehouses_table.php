@@ -4,11 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateWarehousesTable extends Migration
 {
     public function up()
     {
-        // جدول انبارها
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique()->comment('کد انبار');
@@ -20,7 +19,6 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        // جدول موجودی انبار
         Schema::create('warehouse_stocks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('warehouse_id')->constrained()->comment('شناسه انبار');
@@ -29,7 +27,7 @@ return new class extends Migration
             $table->decimal('minimum_stock', 20, 2)->default(0)->comment('حداقل موجودی');
             $table->decimal('maximum_stock', 20, 2)->default(0)->comment('حداکثر موجودی');
             $table->timestamps();
-            
+
             $table->unique(['warehouse_id', 'product_id']);
         });
     }
@@ -39,4 +37,4 @@ return new class extends Migration
         Schema::dropIfExists('warehouse_stocks');
         Schema::dropIfExists('warehouses');
     }
-};
+}

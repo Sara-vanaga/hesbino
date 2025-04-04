@@ -4,11 +4,10 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreatePersonsTable extends Migration
 {
     public function up()
     {
-        // جدول اشخاص - برای نگهداری اطلاعات مشتریان، فروشندگان و سهامداران
         Schema::create('persons', function (Blueprint $table) {
             $table->id();
             $table->string('code')->unique()->comment('کد شخص');
@@ -33,4 +32,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('persons');
     }
-};
+}
